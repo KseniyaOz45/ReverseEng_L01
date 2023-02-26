@@ -1,4 +1,5 @@
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rover {
     private int[] position;
@@ -19,22 +20,19 @@ public class Rover {
 
     public void go(String instructions) {
         instructions.chars().forEach((instruction) -> {
-            if(instruction == 'R'){
-                movement_to_right();
-            }
-
-            if(instruction == 'L') {
-                movement_to_left();
-            }
-
-            if(instruction == 'F'){
-                move_to_forward();
-            }
-
-            if(instruction == 'B'){
-                move_to_back();
-            }
+            execute((char) instruction);
         });
+    }
+
+    private void execute(char instruction)
+    {
+        Map<Character, Runnable> actions = new HashMap<>();
+        actions.put('R', this::movement_to_right);
+        actions.put('L', this::movement_to_left);
+        actions.put('F', this::move_to_forward);
+        actions.put('B', this::move_to_back);
+
+        actions.get(instruction).run();
     }
 
     private void move_to_back() {
