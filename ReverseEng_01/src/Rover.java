@@ -20,80 +20,96 @@ public class Rover {
     public void go(String instructions) {
         instructions.chars().forEach((instruction) -> {
             if(instruction == 'R'){
-
-                if(facing == "N") {
-                    facing = "E";
-                    return;
-                }
-
-                if(facing == "E") {
-                    facing = "S";
-                    return;
-                }
-
-                if(facing == "S") {
-                    facing = "W";
-                    return;
-                }
-
-                facing = "N";
+                movement_to_right();
             }
 
             if(instruction == 'L') {
-                if (facing == "N") {
-                    facing = "W";
-                    return;
-                }
-
-                if (facing == "W") {
-                    facing = "S";
-                    return;
-                }
-
-                if (facing == "S") {
-                    facing = "E";
-                    return;
-                }
-
-                facing = "N";
+                movement_to_left();
             }
 
             if(instruction == 'F'){
-                if(facing == "N") {
-                    position[1] = position[1] + 1;
-                }
-
-                if(facing == "E"){
-                    position[0] = position[0] + 1;
-                }
-
-                if(facing == "S"){
-                    position[1] = position[1] - 1;
-                }
-
-                if(facing == "W"){
-                    position[0] = position[0] - 1;
-                }
+                move_to_forward();
             }
 
             if(instruction == 'B'){
-                if(facing == "N") {
-                    position[1] = position[1] - 1;
-                }
-
-                if(facing == "E"){
-                    position[0] = position[0] - 1;
-                }
-
-                if(facing == "S"){
-                    position[1] = position[1] + 1;
-                }
-
-                if(facing == "W"){
-                    position[0] = position[0] + 1;
-                }
+                move_to_back();
             }
         });
+    }
+
+    private void move_to_back() {
+        if(facing == "N") {
+            position[1] = position[1] - 1;
+        }
+
+        if(facing == "E"){
+            position[0] = position[0] - 1;
+        }
+
+        if(facing == "S"){
+            position[1] = position[1] + 1;
+        }
+
+        if(facing == "W"){
+            position[0] = position[0] + 1;
+        }
+    }
+
+    private void move_to_forward() {
+        if(facing == "N") {
+            position[1] = position[1] + 1;
+        }
+
+        if(facing == "E"){
+            position[0] = position[0] + 1;
+        }
+
+        if(facing == "S"){
+            position[1] = position[1] - 1;
+        }
+
+        if(facing == "W"){
+            position[0] = position[0] - 1;
+        }
+    }
+
+    private void movement_to_left() {
+        if (facing == "N") {
+            facing = "W";
+            return;
+        }
+
+        if (facing == "W") {
+            facing = "S";
+            return;
+        }
+
+        if (facing == "S") {
+            facing = "E";
+            return;
+        }
+
+        facing = "N";
+    }
+
+    private void movement_to_right()
+    {
+        if(facing == "N") {
+            facing = "E";
+            return;
+        }
+
+        if(facing == "E") {
+            facing = "S";
+            return;
+        }
+
+        if(facing == "S") {
+            facing = "W";
+            return;
+        }
+
+        facing = "N";
     }
 }
 
