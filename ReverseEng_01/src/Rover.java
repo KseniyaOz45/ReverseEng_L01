@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,42 +73,17 @@ public class Rover {
     }
 
     private void movement_to_left() {
-        if (facing == "N") {
-            facing = "W";
-            return;
-        }
-
-        if (facing == "W") {
-            facing = "S";
-            return;
-        }
-
-        if (facing == "S") {
-            facing = "E";
-            return;
-        }
-
-        facing = "N";
+        turn(new String[]{"N", "W", "S", "E"});
     }
 
     private void movement_to_right()
     {
-        if(facing == "N") {
-            facing = "E";
-            return;
-        }
+        turn(new String[]{"N", "E", "S", "W"});
+    }
 
-        if(facing == "E") {
-            facing = "S";
-            return;
-        }
-
-        if(facing == "S") {
-            facing = "W";
-            return;
-        }
-
-        facing = "N";
+    private void turn(String[] compass) {
+        int current = Arrays.asList(compass).indexOf(facing);
+        facing = compass[(current + 1) % 4];
     }
 }
 
